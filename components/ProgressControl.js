@@ -18,7 +18,6 @@ function updateProgress(progress, change) {
     (change < 0 && progress.value > 0)
   ) {
     progress.value += change;
-    console.log(`After update: ${progress.value}`);
     updateProgressDisplay(progress);
     saveProgressToLocalStorage(progress);
   }

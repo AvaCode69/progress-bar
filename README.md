@@ -35,14 +35,14 @@ npm test
 
 ### Folder structure
 
-**assets/css** : Contains CSS files, including style.css .
-**components**: Contains component definitions that manage specific functionalities of the application, such as ProgressBar.js and ProgressControl.js .
-**composable/Utils**: The definitions of the reusable components in the project.
-**data**: Contains sample data used for demonstration purposes, such as bars.js .
-**index.html**: The main HTML file for the application.
-**main.js**: The entry point of the application that initializes the app and renders components.
-**.github**: Configuration files for CI/CD pipeline. Currently, the CI/CD pipeline is not fully set up or deployed, but this folder contains the necessary configurations to run it in the future.
-**k8s**: Contains Kubernetes configuration files for deploying the application on Azure or other cloud platforms. While the deployment setup is not yet fully implemented, the configurations are provided for future use.
+**assets/css** : Contains CSS files, including style.css .  
+**components**: Contains component definitions that manage specific functionalities of the application, such as ProgressBar.js and ProgressControl.js .  
+**composable/Utils**: The definitions of the reusable components in the project.  
+**data**: Contains sample data used for demonstration purposes, such as bars.js .  
+**index.html**: The main HTML file for the application.  
+**main.js**: The entry point of the application that initializes the app and renders components.  
+**.github**: Configuration files for CI/CD pipeline. Currently, the CI/CD pipeline is not fully set up or deployed, but this folder contains the necessary configurations to run it in the future.  
+**k8s**: Contains Kubernetes configuration files for deploying the application on Azure or other cloud platforms. While the deployment setup is not yet fully implemented, the configurations are provided for future use.  
 **Dockerfile**: Contains instructions to build a Docker image for the project, allowing the application to be containerized and run in a Docker environment.
 
 ### Framework and Libraries
