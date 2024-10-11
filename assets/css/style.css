@@ -19,7 +19,7 @@ section {
 }
 
 .progress-box {
-  padding-bottom: 10px;
+  padding-bottom: 0.625rem;
   margin: auto;
   text-align: center;
 }
@@ -27,9 +27,9 @@ section {
 .progress-container {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
   width: 100%;
-  margin-bottom: 11px;
+  margin-bottom: 0.6875rem;
   flex-direction: row;
 }
 
@@ -49,14 +49,14 @@ input[type="checkbox"] {
 
 progress {
   background-color: #dfdfdf;
-  border-radius: 13px;
-  height: 30px;
+  border-radius: 0.8125rem;
+  height: 1.875rem;
   width: 100%;
 }
 
 progress::-webkit-progress-bar {
   background-color: #dfdfdf;
-  border-radius: 13px;
+  border-radius: 0.8125rem;
 }
 
 progress::-webkit-progress-value {
@@ -70,9 +70,9 @@ progress::-webkit-progress-value {
     transparent 75%,
     transparent
   );
-  background-size: 20px 20px;
+  background-size: 1.25rem 1.25rem;
   background-color: var(--progress-color);
-  border-radius: 13px;
+  border-radius: 0.8125rem;
   transition: width 0.5s ease;
 }
 
@@ -87,19 +87,19 @@ progress::-moz-progress-bar {
     transparent 75%,
     transparent
   );
-  background-size: 20px 20px;
+  background-size: 1.25rem 1.25rem;
   background-color: var(--progress-color);
-  border-radius: 13px;
+  border-radius: 0.8125rem;
   transition: width 0.5s ease;
 }
 
 .progress-percentage {
-  margin-left: 10px;
+  margin-left: 0.625rem;
 }
 
 @keyframes progress-bar-stripes {
   from {
-    background-position: 40px 0;
+    background-position: 2.5rem 0;
   }
   to {
     background-position: 0 0;
@@ -109,8 +109,9 @@ progress::-moz-progress-bar {
 button {
   border: 0.1rem solid;
   border-radius: 6rem;
-  padding: 0.5rem 0.8rem;
-  font-size: 1.2rem;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  margin: 0 0.3125rem;
 }
 
 #autoIncreaseBtn,
@@ -145,7 +146,7 @@ button {
   }
 
   .progress-container {
-    gap: 5px;
+    gap: 0.3125rem;
     flex-direction: row;
     align-items: center;
   }
@@ -154,7 +155,7 @@ button {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 0.625rem;
   }
 
   button {
