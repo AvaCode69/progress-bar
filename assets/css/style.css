@@ -1,0 +1,165 @@
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+}
+
+section {
+  width: 65%;
+  margin: 0 auto;
+}
+
+.progress-box {
+  padding-bottom: 10px;
+  margin: auto;
+  text-align: center;
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 11px;
+  flex-direction: row;
+}
+
+input[type="checkbox"] {
+  margin: 0;
+  width: 1rem;
+  height: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: inline-block;
+}
+
+progress {
+  background-color: #dfdfdf;
+  border-radius: 13px;
+  height: 30px;
+  width: 100%;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #dfdfdf;
+  border-radius: 13px;
+}
+
+progress::-webkit-progress-value {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 20px 20px;
+  background-color: var(--progress-color);
+  border-radius: 13px;
+  transition: width 0.5s ease;
+}
+
+progress::-moz-progress-bar {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 20px 20px;
+  background-color: var(--progress-color);
+  border-radius: 13px;
+  transition: width 0.5s ease;
+}
+
+.progress-percentage {
+  margin-left: 10px;
+}
+
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 40px 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+button {
+  border: 0.1rem solid;
+  border-radius: 6rem;
+  padding: 0.5rem 0.8rem;
+  font-size: 1.2rem;
+}
+
+#autoIncreaseBtn,
+#stopIncreaseBtn {
+  color: #4cac54;
+  background: none;
+  border-color: #4cac54;
+}
+
+#increaseBtn {
+  background-color: #4cac54;
+  border-color: #4cac54;
+  color: #fff;
+}
+
+#decreaseBtn {
+  background-color: #ff5757;
+  border-color: #ff5757;
+  color: #fff;
+}
+
+#resetBtn {
+  background-color: #bbbbbb;
+  border-color: #bbbbbb;
+  color: #fff;
+}
+
+/* Mobile responsive  */
+@media only screen and (max-width: 600px) {
+  section {
+    width: 90%;
+  }
+
+  .progress-container {
+    gap: 5px;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .button-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  button {
+    width: 45%;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}

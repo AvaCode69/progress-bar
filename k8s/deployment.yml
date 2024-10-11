@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: progressBar-aks
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: progressBar-aks
+  template:
+    metadata:
+      labels:
+        app: progressBar-aks
+    spec:
+      containers:
+        - name: progressBar-aks
+          image: company.azurecr.io/progress-bar-app:latest
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "128Mi"
+          ports:
+            - containerPort: 80
+            - containerPort: 443
