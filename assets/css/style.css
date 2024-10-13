@@ -39,14 +39,6 @@ input[type="checkbox"] {
   height: 1rem;
 }
 
-.hidden {
-  display: none;
-}
-
-.visible {
-  display: inline-block;
-}
-
 progress {
   background-color: #dfdfdf;
   border-radius: 0.8125rem;
@@ -92,20 +84,9 @@ progress::-moz-progress-bar {
   border-radius: 0.8125rem;
   transition: width 0.5s ease;
 }
-
-.progress-percentage {
-  margin-left: 0.625rem;
+.hidden {
+  display: none;
 }
-
-@keyframes progress-bar-stripes {
-  from {
-    background-position: 2.5rem 0;
-  }
-  to {
-    background-position: 0 0;
-  }
-}
-
 button {
   border: 0.1rem solid;
   border-radius: 6rem;
