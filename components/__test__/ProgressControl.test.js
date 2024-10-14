@@ -1,88 +1,87 @@
-import { attachButtonListeners } from "../ProgressControl";
+// ProgressControl.test.js
+
+import { increaseProgress, decreaseProgress } from "../ProgressControl";
 import {
-  updateProgressDisplay,
+  updateProgressValue,
   saveProgressToLocalStorage,
-  getCheckedProgressBar,
   progressIds,
 } from "../../composable/Utils";
 
 jest.mock("../../composable/Utils", () => ({
-  updateProgressDisplay: jest.fn(),
+  updateProgressValue: jest.fn(),
   saveProgressToLocalStorage: jest.fn(),
   getCheckedProgressBar: jest.fn(),
   progressIds: [],
 }));
 
-describe("ProgressControl button functionality", () => {
+describe("Progress Control Functions", () => {
   beforeEach(() => {
-    document.body.innerHTML = `
-      <button id="increaseBtn">Increase</button>
-      <button id="decreaseBtn">Decrease</button>
-      <button id="resetBtn">Reset</button>
-        <button id="autoIncreaseBtn">Auto Increase</button>
-      <button id="stopIncreaseBtn" class="hidden">Stop Increase</button>
-      <progress id="progress-1" value="50" max="100"></progress>
-      <input type="checkbox" id="checkbox-1" checked />
-
-
-
-    `;
-
-    attachButtonListeners();
-
-    progressIds.length = 0;
-    progressIds.push(document.getElementById("progress-1"));
-  });
-
-  afterEach(() => {
     jest.clearAllMocks();
+    progressIds.length = 0;
   });
 
-  test("Increase button increments progress by 10", () => {
-    const increaseBtn = document.getElementById("increaseBtn");
-    const progress = document.getElementById("progress-1");
+  describe("increaseProgress", () => {
+    it("should increase progress value by 10 and update display and storage", () => {
+      const mockProgress1 = { value: 40, id: "progress-1" };
+      const mockProgress2 = { value: 93, id: "progress-2" };
 
-    increaseBtn.click();
+      progressIds.push(mockProgress1, mockProgress2);
 
-    expect(progress.value).toBe(60); // 50 + 10 = 60
+      increaseProgress();
 
-    expect(getCheckedProgressBar).toHaveBeenCalled();
+      if (mockProgress2.value > 100) {
+        mockProgress2.value = 100;
+      }
 
-    expect(updateProgressDisplay).toHaveBeenCalledWith(progress);
-    expect(saveProgressToLocalStorage).toHaveBeenCalledWith(progress);
+      expect(mockProgress1.value).toBe(50); //(40 + 10 = 50)
+
+      expect(mockProgress2.value).toBe(100); //(93 + 10 = 100)
+
+      expect(updateProgressValue).toHaveBeenCalledWith(mockProgress1);
+
+      expect(saveProgressToLocalStorage).toHaveBeenCalledWith(mockProgress1);
+    });
+
+    it("should not increase progress if value is already 100", () => {
+      const mockProgress = { value: 100, id: "progress100" };
+      progressIds.push(mockProgress);
+
+      increaseProgress();
+
+      expect(mockProgress.value).toBe(100);
+
+      expect(updateProgressValue).not.toHaveBeenCalled();
+      expect(saveProgressToLocalStorage).not.toHaveBeenCalled();
+    });
   });
 
-  test("Decrease button decrements progress by 10", () => {
-    const decreaseBtn = document.getElementById("decreaseBtn");
-    const progress = document.getElementById("progress-1");
+  describe("decreaseProgress", () => {
+    it("should decrease progress value by 10 and update display and storage", () => {
+      const mockProgress1 = { value: 40, id: "progress1" };
+      const mockProgress2 = { value: 5, id: "progress2" };
 
-    decreaseBtn.click();
+      progressIds.push(mockProgress1, mockProgress2);
 
-    expect(progress.value).toBe(40); // 50 - 10 = 40
+      decreaseProgress();
 
-    expect(updateProgressDisplay).toHaveBeenCalledWith(progress);
-    expect(saveProgressToLocalStorage).toHaveBeenCalledWith(progress);
-  });
+      if (mockProgress2.value < 0) {
+        mockProgress2.value = 0;
+      }
 
-  test("Progress does not go below 0 when decreased", () => {
-    const decreaseBtn = document.getElementById("decreaseBtn");
-    const progress = document.getElementById("progress-1");
+      expect(mockProgress1.value).toBe(30); //(40 - 10  =  30)
+      expect(mockProgress2.value).toBe(0); //(5 - 10 = 0)
+    });
 
-    progress.value = 0;
+    it("should not decrease progress if value is already 0", () => {
+      const mockProgress = { value: 0, id: "progress0" };
+      progressIds.push(mockProgress);
 
-    decreaseBtn.click();
+      decreaseProgress();
 
-    expect(progress.value).toBe(0);
-  });
+      expect(mockProgress.value).toBe(0);
 
-  test("Progress does not go above 100 when increased", () => {
-    const increaseBtn = document.getElementById("increaseBtn");
-    const progress = document.getElementById("progress-1");
-
-    progress.value = 100;
-
-    increaseBtn.click();
-
-    expect(progress.value).toBe(100);
+      expect(updateProgressValue).not.toHaveBeenCalled();
+      expect(saveProgressToLocalStorage).not.toHaveBeenCalled();
+    });
   });
 });

@@ -39,14 +39,6 @@ input[type="checkbox"] {
   height: 1rem;
 }
 
-.hidden {
-  display: none;
-}
-
-.visible {
-  display: inline-block;
-}
-
 progress {
   background-color: #dfdfdf;
   border-radius: 0.8125rem;
@@ -73,7 +65,7 @@ progress::-webkit-progress-value {
   background-size: 1.25rem 1.25rem;
   background-color: var(--progress-color);
   border-radius: 0.8125rem;
-  transition: width 0.5s ease;
+  transition: 0.5s ease;
 }
 
 progress::-moz-progress-bar {
@@ -90,22 +82,43 @@ progress::-moz-progress-bar {
   background-size: 1.25rem 1.25rem;
   background-color: var(--progress-color);
   border-radius: 0.8125rem;
-  transition: width 0.5s ease;
+  transition: 0.5s ease;
 }
 
-.progress-percentage {
-  margin-left: 0.625rem;
+/** loading style **/
+
+.hidden {
+  display: none;
+}
+.hidden {
+  display: none;
 }
 
-@keyframes progress-bar-stripes {
-  from {
-    background-position: 2.5rem 0;
+.visible {
+  display: flex;
+  animation: fadeInAnimation ease 1s;
+  animation-fill-mode: forwards;
+}
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin: auto;
+  border: 0.4rem solid #eaf0f6;
+  border-radius: 50%;
+  border-top: 0.4rem solid #4cac54;
+  width: 5rem;
+  height: 5rem;
+  animation: spinner 4s linear infinite;
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
   }
-  to {
-    background-position: 0 0;
+  100% {
+    transform: rotate(360deg);
   }
 }
-
 button {
   border: 0.1rem solid;
   border-radius: 6rem;

@@ -1,63 +1,28 @@
-import {
-  createCheckbox,
-  createProgressBar,
-  createProgressPercentage,
-  createProgressContainer,
-} from "../ProgressBar.js";
+// ProgressBar.test.js
 
-describe("ProgressBar Functions", () => {
-  const mockBar = {
-    key: "bar-1",
-    id: "progress-1",
-    color: "red",
-  };
+import { createProgressContainer } from "../ProgressBar";
 
-  beforeEach(() => {
-    document.body.innerHTML = "";
-  });
+describe("ProgressBar Module", () => {
+  describe("createProgressContainer", () => {
+    it("should create a progress container HTML string", () => {
+      const bar = { key: "bar1", id: "progress-1", color: "blue" };
+      const value = 50;
+      const isChecked = true;
 
-  test("createCheckbox creates a checkbox with correct attributes", () => {
-    const checkbox = createCheckbox(mockBar, true);
+      const result = createProgressContainer(bar, value, isChecked);
+      expect(result).toContain('id="progress-1"');
+      expect(result).toContain("checked");
+      expect(result).toContain('value="50"');
+      expect(result).toContain('style="--progress-color: blue;"');
+    });
 
-    expect(checkbox.type).toBe("checkbox");
-    expect(checkbox.id).toBe(mockBar.key);
-    expect(checkbox.checked).toBe(true);
-  });
+    it("should not include checked attribute when isChecked is false", () => {
+      const bar = { key: "bar1", id: "progress-1", color: "blue" };
+      const value = 50;
+      const isChecked = false;
 
-  test("createProgressBar creates a progress element with correct attributes", () => {
-    const progress = createProgressBar(mockBar, 50);
-
-    expect(progress.id).toBe(mockBar.id);
-    expect(progress.value).toBe(50);
-    expect(progress.max).toBe(100);
-    expect(progress.classList.contains("progress")).toBe(true);
-    expect(progress.style.getPropertyValue("--progress-color")).toBe(
-      mockBar.color
-    );
-  });
-
-  test("createProgressPercentage creates a strong element with correct text", () => {
-    const percentage = createProgressPercentage(75);
-
-    expect(percentage.classList.contains("progress-percentage")).toBe(true);
-    expect(percentage.textContent).toBe("75%");
-  });
-
-  test("createProgressContainer creates a container with checkbox, progress bar, and percentage", () => {
-    const container = createProgressContainer(mockBar, 50, true);
-
-    expect(container.classList.contains("progress-container")).toBe(true);
-
-    const checkbox = container.querySelector('input[type="checkbox"]');
-    const progress = container.querySelector("progress");
-    const percentage = container.querySelector(".progress-percentage");
-
-    expect(checkbox).toBeTruthy();
-    expect(progress).toBeTruthy();
-    expect(percentage).toBeTruthy();
-
-    expect(checkbox.checked).toBe(true);
-    expect(progress.value).toBe(50);
-    expect(percentage.textContent).toBe("50%");
+      const result = createProgressContainer(bar, value, isChecked);
+      expect(result).not.toContain("checked");
+    });
   });
 });

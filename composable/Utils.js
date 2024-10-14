@@ -1,4 +1,6 @@
-// This module manages the state of progress bars, including saving and retrieving checkbox states, updating the display of progress bars, and handling visibility toggling of UI elements.
+// This module manages the state and behavior of progress bars in a UI.
+// It includes functionality for saving and retrieving checkbox states, updating progress bar values and their display,
+// saving the state to local storage, and toggling the visibility of UI elements like stop auto increment buttons.
 
 export let progressIds = []; // Array to hold references to currently checked progress bar elements.
 
@@ -7,8 +9,15 @@ export function saveCheckboxState(key, isChecked) {
   localStorage.setItem(key, JSON.stringify(isChecked));
 }
 
+// Function to handle event listeners dynamically
+export function attachCheckboxEventListeners(bar, checkbox) {
+  checkbox.addEventListener("change", () =>
+    saveCheckboxState(bar.key, checkbox.checked)
+  );
+}
+
 // This function is for  Updates progress bar's percentage.
-export function updateProgressDisplay(progress) {
+export function updateProgressValue(progress) {
   const percentage = progress.nextElementSibling;
   percentage.textContent = `${progress.value}%`;
 }
