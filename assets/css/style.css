@@ -84,7 +84,6 @@ progress::-moz-progress-bar {
   border-radius: 0.8125rem;
   transition: 0.5s ease;
 }
-<<<<<<< HEAD
 
 /** loading style **/
 
@@ -120,11 +119,6 @@ progress::-moz-progress-bar {
     transform: rotate(360deg);
   }
 }
-=======
-.hidden {
-  display: none;
-}
->>>>>>> 05fb77915b174cfc362ee8115c4cc40e189875a2
 button {
   border: 0.1rem solid;
   border-radius: 6rem;
