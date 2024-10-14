@@ -51,6 +51,3 @@ npm test
     - HTML
     - CSS
     - Jest: For testing purposes.
-
-- ### Coding Conventions :
-  - **Comments**: Inline comments and documentation are used to explain complex logic and important sections of code.
