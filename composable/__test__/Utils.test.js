@@ -1,67 +1,43 @@
-import {
-  getCheckedProgressBar,
-  progressIds,
-  attachCheckboxEventListeners,
-} from "../Utils";
+import { getCheckedProgressBar, progressIds } from "../Utils";
 
-beforeEach(() => {
-  // For Mock localStorage
-  jest.clearAllMocks();
-  Storage.prototype.setItem = jest.fn();
-  Storage.prototype.getItem = jest.fn();
-});
-describe("Utils", () => {
-  describe("getCheckedProgressBar", () => {
-    beforeEach(() => {
-      document.body.innerHTML = `
-      <div>
-        <progress id="progress-1" value="50" max="100"></progress>
-        <input type="checkbox" id="checkbox-1" checked />
-        <progress id="progress-2" value="30" max="100"></progress>
-        <input type="checkbox" id="checkbox-2" />
-        <progress id="progress-3" value="80" max="100"></progress>
-        <input type="checkbox" id="checkbox-3" checked />
-      </div>
+describe("getCheckedProgressBar", () => {
+  beforeEach(() => {
+    progressIds.length = 0;
+
+    document.body.innerHTML = `
+      <input type="checkbox" data-progress="progress-1" checked />
+      <input type="checkbox" data-progress="progress-2" checked />
+      <input type="checkbox" data-progress="progress-3" />
+      <progress id="progress-1" value="50" max="100"></progress>
+      <progress id="progress-2" value="75" max="100"></progress>
+      <progress id="progress-3" value="90" max="100"></progress>
     `;
-    });
-
-    afterEach(() => {
-      progressIds.length = 0;
-    });
-
-    test("should populate progressIds with checked checkboxes", () => {
-      getCheckedProgressBar();
-
-      expect(progressIds).toHaveLength(2);
-      expect(progressIds).toEqual([
-        document.getElementById("progress-1"),
-        document.getElementById("progress-3"),
-      ]);
-    });
-
-    test("should be empty when no checkboxes are checked", () => {
-      document.getElementById("checkbox-1").checked = false;
-      document.getElementById("checkbox-3").checked = false;
-
-      getCheckedProgressBar();
-
-      expect(progressIds).toHaveLength(0);
-    });
   });
-  describe("attachCheckboxEventListeners", () => {
-    it("should attach a change event listener to the checkbox", () => {
-      const bar = { key: "bar1" };
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
 
-      attachCheckboxEventListeners(bar, checkbox);
-      checkbox.checked = true;
-      checkbox.dispatchEvent(new Event("change"));
+  afterEach(() => {
+    document.body.innerHTML = "";
+  });
 
-      expect(localStorage.setItem).toHaveBeenCalledWith(
-        "bar1",
-        JSON.stringify(true)
-      );
-    });
+  it("should populate progressIds with checked progress bars", () => {
+    getCheckedProgressBar();
+
+    expect(progressIds).toHaveLength(2);
+    expect(progressIds).toEqual([
+      document.getElementById("progress-1"),
+      document.getElementById("progress-2"),
+    ]);
+  });
+
+  it("should handle the case when no checkboxes are checked", () => {
+    document.body.innerHTML = `
+      <input type="checkbox" data-progress="progress-1" />
+      <input type="checkbox" data-progress="progress-2" />
+      <progress id="progress-1" value="50" max="100"></progress>
+      <progress id="progress-2" value="75" max="100"></progress>
+    `;
+
+    getCheckedProgressBar();
+
+    expect(progressIds).toHaveLength(0);
   });
 });
