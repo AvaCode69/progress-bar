@@ -1,10 +1,7 @@
 // This module manages progress bar functionality, including updating progress values, handling button events, and storing progress states in local storage.
 
-let intervalIds = [];
-
 import {
   updateProgressValue,
-  saveProgressToLocalStorage,
   toggleVisibility,
   getCheckedProgressBar,
   progressIds,
@@ -13,13 +10,12 @@ import {
 import { bars } from "../data/bars.js";
 
 function updateProgress(progress, change) {
-  if (
-    (change > 0 && progress.value < 100) ||
-    (change < 0 && progress.value > 0)
-  ) {
-    progress.value += change;
+  const newValue = Math.min(Math.max(progress.value + change, 0), 100);
+
+  if (progress.value !== newValue) {
+    progress.value = newValue;
     updateProgressValue(progress);
-    saveProgressToLocalStorage(progress);
+    localStorage.setItem(progress.id, progress.value);
   }
 }
 
@@ -47,12 +43,14 @@ export function resetProgress() {
       updateProgressValue(progress);
     }
 
-    const checkbox = document.getElementById(bar.key);
+    const checkbox = document.querySelector(`input[data-progress="${bar.id}"]`);
     if (checkbox) {
       checkbox.checked = false;
     }
   });
 }
+
+let intervalIds = [];
 
 export function autoIncrease() {
   toggleVisibility("autoIncreaseBtn", "stopIncreaseBtn");

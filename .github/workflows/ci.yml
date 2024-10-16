@@ -22,8 +22,14 @@ jobs:
         with:
           node-version: "20.10.0"
 
+      - name: Clear npm cache
+        run: npm cache clean --force
+
       - name: Install dependencies
         run: npm install
 
-      - name: Build js application
-        run: npm run build
+      - name: Fix Jest permissions
+        run: chmod +x ./node_modules/.bin/jest
+
+      - name: Run tests
+        run: npm test
