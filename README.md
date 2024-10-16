@@ -36,7 +36,7 @@ npm test
 ### Folder structure
 
 **assets/css** : Contains CSS files, including style.css .  
-**components**: Contains component definitions that manage specific functionalities of the application, such as ProgressBar.js and ProgressControl.js .  
+**components**: Contains component definitions that manage specific functionalities of the application, such as ProgressBar.js and ButtonControl.js .  
 **composable/Utils**: The definitions of the reusable components in the project.  
 **data**: Contains sample data used for demonstration purposes, such as bars.js .  
 **index.html**: The main HTML file for the application.  

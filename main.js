@@ -1,33 +1,38 @@
 // Initializes progress bars from local storage and attaches button event listeners when the window loads.
-
 import { createProgressContainer } from "./components/ProgressBar.js";
-import { attachButtonListeners } from "./components/ProgressControl.js";
+import { attachButtonListeners } from "./components/ButtonControl.js";
 import { bars } from "./data/bars.js";
-import { attachCheckboxEventListeners } from "./composable/Utils.js";
 
 export function initProgressBars() {
   const progressBox = document.getElementById("progress-box");
 
-  progressBox.innerHTML = "";
-
   bars.forEach((bar) => {
-    const value = parseInt(localStorage.getItem(bar.id)) || 50;
-    const isChecked = JSON.parse(localStorage.getItem(bar.key)) || false;
+    const storedValue = localStorage.getItem(bar.id) || 50;
 
-    const progressHTML = createProgressContainer(bar, value, isChecked);
+    const isChecked =
+      JSON.parse(localStorage.getItem(`checkbox-${bar.id}`)) || false;
 
-    progressBox.innerHTML += progressHTML;
-  });
+    const container = document.createElement("div");
 
-  bars.forEach((bar) => {
-    const checkbox = document.getElementById(bar.key);
+    container.innerHTML = createProgressContainer(bar, storedValue, isChecked);
+
+    progressBox.appendChild(container);
+
+    const checkbox = container.querySelector(
+      `input[data-progress="${bar.id}"]`
+    );
     if (checkbox) {
-      attachCheckboxEventListeners(bar, checkbox);
+      checkbox.addEventListener("change", () =>
+        localStorage.setItem(
+          `checkbox-${bar.id}`,
+          JSON.stringify(checkbox.checked)
+        )
+      );
     }
   });
 }
 
-window.onload = () => {
+document.addEventListener("DOMContentLoaded", () => {
   const loading = document.getElementById("loading");
   const content = document.getElementById("content");
 
@@ -39,4 +44,4 @@ window.onload = () => {
     initProgressBars();
     attachButtonListeners();
   }, 500);
-};
+});
